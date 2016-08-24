@@ -1,0 +1,17 @@
+{
+  "generator-plugin-wp": {
+    "name": "Zerif Light Font-Awesome Feature Icons",
+    "homepage": "http://plugish.com",
+    "description": "A plugin which adds the ability for users to use font-awesome icons instead of uploading images in the customizer.",
+    "version": "0.1.0",
+    "author": "JayWood",
+    "authoremail": "jjwood2004@gmail.com",
+    "authorurl": "http://plugish.com",
+    "license": "GPLv2",
+    "slug": "zlfa-feature-icons",
+    "classname": "ZLFA_Feature_Icons",
+    "classprefix": "ZLFAFI_",
+    "prefix": "zlfa_feature_icons",
+    "year": 2016
+  }
+}
