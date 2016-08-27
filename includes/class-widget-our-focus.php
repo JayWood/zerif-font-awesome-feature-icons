@@ -68,9 +68,22 @@ class ZLFAFI_Widget_Our_Focus extends WP_Widget {
 					</div>
 
 					<?php
-				}
-			}
-			?>
+				} ?>
+			<?php } elseif ( ! empty( $instance['zlfai-icon'] ) ) {
+				$icon_class = $instance['zlfai-icon'];
+				?>
+				<div class="service-icon">
+					<?php if ( ! empty( $instance['link'] ) ) { ?>
+						<a href="<?php echo esc_url( $instance['link'] ); ?>">
+							<i class="pixeden fa <?php echo $icon_class; ?>" style="width:100%; height:100%; font-size: 5.5em; padding-top: 0.25em"></i>
+						</a><!-- FOCUS ICON-->
+					<?php } else { ?>
+					<i class="pixeden fa <?php echo $icon_class; ?>" style="width:100%; height:100%; font-size: 5.5em; padding-top: 0.25em"></i><!-- FOCUS ICON-->
+					<?php } ?>
+				</div>
+				<?php
+			} ?>
+
 			<h3 class="red-border-bottom">
 				<?php if ( ! empty( $instance['title'] ) ) {
 					echo apply_filters( 'widget_title', $instance['title'] );
