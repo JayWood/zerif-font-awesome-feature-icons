@@ -22,9 +22,7 @@ class ZLFAFI_Widget_Our_Focus extends WP_Widget {
 
 	function widget( $args, $instance ) {
 
-		extract( $args );
-
-		echo $before_widget;
+		echo $args['before_widget'];
 
 		?>
 
@@ -36,8 +34,9 @@ class ZLFAFI_Widget_Our_Focus extends WP_Widget {
 
 					<?php if ( ! empty( $instance['link'] ) ) { ?>
 
-						<a href="<?php echo esc_url( $instance['link'] ); ?>"><i class="pixeden" style="background:url(<?php echo esc_url( $instance['image_uri'] ); ?>) no-repeat center;width:100%; height:100%;"></i>
-							<!-- FOCUS ICON--></a>
+						<a href="<?php echo esc_url( $instance['link'] ); ?>">
+							<i class="pixeden" style="background:url(<?php echo esc_url( $instance['image_uri'] ); ?>) no-repeat center;width:100%; height:100%;"></i>
+						</a><!-- FOCUS ICON-->
 
 					<?php } else { ?>
 
@@ -89,7 +88,7 @@ class ZLFAFI_Widget_Our_Focus extends WP_Widget {
 
 		<?php
 
-		echo $after_widget;
+		echo $args['after_widget'];
 
 	}
 
