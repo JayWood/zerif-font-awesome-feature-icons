@@ -93,12 +93,13 @@ class ZLFAFI_Widget_Our_Focus extends WP_Widget {
 
 	function update($new_instance, $old_instance) {
 
-		$instance = $old_instance;
-		$instance['text'] = stripslashes(wp_filter_post_kses($new_instance['text']));
-		$instance['title'] = strip_tags($new_instance['title']);
-		$instance['link'] = strip_tags( $new_instance['link'] );
-		$instance['image_uri'] = strip_tags($new_instance['image_uri']);
-		$instance['custom_media_id'] = strip_tags($new_instance['custom_media_id']);
+		$instance                    = $old_instance;
+		$instance['text']            = stripslashes( wp_filter_post_kses( $new_instance['text'] ) );
+		$instance['title']           = strip_tags( $new_instance['title'] );
+		$instance['link']            = strip_tags( $new_instance['link'] );
+		$instance['image_uri']       = strip_tags( $new_instance['image_uri'] );
+		$instance['custom_media_id'] = strip_tags( $new_instance['custom_media_id'] );
+		$instance['zlfai-icon']      = strip_tags( $new_instance['zlfai-icon'] );
 
 		return $instance;
 
@@ -109,7 +110,7 @@ class ZLFAFI_Widget_Our_Focus extends WP_Widget {
 	 *
 	 * @author JayWood
 	 */
-	private function _fa_options() {
+	private function _fa_options( $value = '' ) {
 		$icons = zlfa_feature_icons()->icons;
 		$output = '<option value="none">' . __( 'No Icon', 'zerif-lite' ) . '</option>';
 //		return $output;
@@ -117,7 +118,7 @@ class ZLFAFI_Widget_Our_Focus extends WP_Widget {
 		foreach ( $icons as $icon ) {
 			$icon_array = explode( '-', $icon );
 			$sanitized_name = ucwords( implode( ' ', array_slice( $icon_array, 1, count( $icon_array ) ) ) );
-			$output .= sprintf( '<option value="%1$s">%2$s</option>', $icon, $sanitized_name );
+			$output .= sprintf( '<option value="%1$s" %2$s>%3$s</option>', $icon, selected( $icon, $value, false ), $sanitized_name );
 		}
 		return $output;
 	}
@@ -140,7 +141,7 @@ class ZLFAFI_Widget_Our_Focus extends WP_Widget {
 		<p class="zlfa-feature-icons">
 			<label for="<?php echo $this->get_field_id( 'zlfai-icon' ); ?>"><?php _e( 'Icon', 'zerif-lite' ); ?></label><br />
 			<select class="zlfai-icons widefat" name="<?php echo $this->get_field_name('zlfai-icon'); ?>" id="<?php echo $this->get_field_id('zlfai-icon'); ?>" >
-				<?php echo $this->_fa_options(); ?>
+				<?php echo $this->_fa_options( $instance['zlfai-icon'] ); ?>
 			</select>
 		</p>
 		<p>
