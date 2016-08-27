@@ -28,7 +28,7 @@ class ZLFAFI_Widget_Our_Focus extends WP_Widget {
 
 		<div class="col-lg-3 col-sm-3 focus-box" data-scrollreveal="enter left after 0.15s over 1s">
 
-			<?php if ( ! empty( $instance['image_uri'] ) && ( $instance['image_uri'] != 'Upload Image' ) ) { ?>
+			<?php if ( ! empty( $instance['image_uri'] ) && ( 'Upload Image' !== $instance['image_uri'] ) ) { ?>
 
 				<div class="service-icon">
 
@@ -48,7 +48,7 @@ class ZLFAFI_Widget_Our_Focus extends WP_Widget {
 
 			<?php } elseif ( ! empty( $instance['custom_media_id'] ) ) {
 
-				$zerif_ourfocus_custom_media_id = wp_get_attachment_image_src( $instance["custom_media_id"] );
+				$zerif_ourfocus_custom_media_id = wp_get_attachment_image_src( $instance['custom_media_id'] );
 				if ( ! empty( $zerif_ourfocus_custom_media_id ) && ! empty( $zerif_ourfocus_custom_media_id[0] ) ) {
 					?>
 
@@ -69,13 +69,13 @@ class ZLFAFI_Widget_Our_Focus extends WP_Widget {
 
 					<?php
 				}
-
 			}
 			?>
-
-			<h3 class="red-border-bottom"><?php if ( ! empty( $instance['title'] ) ): echo apply_filters( 'widget_title', $instance['title'] ); endif; ?></h3>
-			<!-- FOCUS HEADING -->
-
+			<h3 class="red-border-bottom">
+				<?php if ( ! empty( $instance['title'] ) ) {
+					echo apply_filters( 'widget_title', $instance['title'] );
+				} ?>
+			</h3><!-- FOCUS HEADING -->
 			<?php
 			if ( ! empty( $instance['text'] ) ) {
 				echo '<p>';
@@ -83,13 +83,9 @@ class ZLFAFI_Widget_Our_Focus extends WP_Widget {
 				echo '</p>';
 			}
 			?>
-
 		</div>
-
 		<?php
-
 		echo $args['after_widget'];
-
 	}
 
 	function update( $new_instance, $old_instance ) {
@@ -109,12 +105,14 @@ class ZLFAFI_Widget_Our_Focus extends WP_Widget {
 	/**
 	 * Creates and returns
 	 *
+	 * @param string $value
 	 * @author JayWood
+	 *
+	 * @return string
 	 */
 	private function _fa_options( $value = '' ) {
 		$icons  = zlfa_feature_icons()->icons;
 		$output = '<option value="none">' . __( 'No Icon', 'zerif-lite' ) . '</option>';
-//		return $output;
 
 		foreach ( $icons as $icon ) {
 			$icon_array     = explode( '-', $icon );
@@ -130,15 +128,15 @@ class ZLFAFI_Widget_Our_Focus extends WP_Widget {
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'zerif-lite' ); ?></label><br/>
-			<input type="text" name="<?php echo $this->get_field_name( 'title' ); ?>" id="<?php echo $this->get_field_id( 'title' ); ?>" value="<?php if ( ! empty( $instance['title'] ) ): echo $instance['title']; endif; ?>" class="widefat">
+			<input type="text" name="<?php echo $this->get_field_name( 'title' ); ?>" id="<?php echo $this->get_field_id( 'title' ); ?>" value="<?php if ( ! empty( $instance['title'] ) ) : echo $instance['title']; endif; ?>" class="widefat">
 		</p>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'text' ); ?>"><?php _e( 'Text', 'zerif-lite' ); ?></label><br/>
-			<textarea class="widefat" rows="8" cols="20" name="<?php echo $this->get_field_name( 'text' ); ?>" id="<?php echo $this->get_field_id( 'text' ); ?>"><?php if ( ! empty( $instance['text'] ) ): echo htmlspecialchars_decode( $instance['text'] ); endif; ?></textarea>
+			<textarea class="widefat" rows="8" cols="20" name="<?php echo $this->get_field_name( 'text' ); ?>" id="<?php echo $this->get_field_id( 'text' ); ?>"><?php if ( ! empty( $instance['text'] ) ) : echo htmlspecialchars_decode( $instance['text'] ); endif; ?></textarea>
 		</p>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'link' ); ?>"><?php _e( 'Link', 'zerif-lite' ); ?></label><br/>
-			<input type="text" name="<?php echo $this->get_field_name( 'link' ); ?>" id="<?php echo $this->get_field_id( 'link' ); ?>" value="<?php if ( ! empty( $instance['link'] ) ): echo esc_url( $instance['link'] ); endif; ?>" class="widefat">
+			<input type="text" name="<?php echo $this->get_field_name( 'link' ); ?>" id="<?php echo $this->get_field_id( 'link' ); ?>" value="<?php if ( ! empty( $instance['link'] ) ) : echo esc_url( $instance['link'] ); endif; ?>" class="widefat">
 		</p>
 		<p class="zlfa-feature-icons">
 			<label for="<?php echo $this->get_field_id( 'zlfai-icon' ); ?>"><?php _e( 'Icon', 'zerif-lite' ); ?></label><br/>
@@ -155,15 +153,14 @@ class ZLFAFI_Widget_Our_Focus extends WP_Widget {
 			endif;
 			?>
 
-			<input type="text" class="widefat custom_media_url" name="<?php echo $this->get_field_name( 'image_uri' ); ?>" id="<?php echo $this->get_field_id( 'image_uri' ); ?>" value="<?php if ( ! empty( $instance['image_uri'] ) ): echo $instance['image_uri']; endif; ?>" style="margin-top:5px;">
+			<input type="text" class="widefat custom_media_url" name="<?php echo $this->get_field_name( 'image_uri' ); ?>" id="<?php echo $this->get_field_id( 'image_uri' ); ?>" value="<?php if ( ! empty( $instance['image_uri'] ) ) : echo $instance['image_uri']; endif; ?>" style="margin-top:5px;">
 
 			<input type="button" class="button button-primary custom_media_button" id="custom_media_button" name="<?php echo $this->get_field_name( 'image_uri' ); ?>" value="<?php _e( 'Upload Image', 'zerif-lite' ); ?>" style="margin-top:5px;"/>
 		</p>
 
-		<input class="custom_media_id" id="<?php echo $this->get_field_id( 'custom_media_id' ); ?>" name="<?php echo $this->get_field_name( 'custom_media_id' ); ?>" type="hidden" value="<?php if ( ! empty( $instance["custom_media_id"] ) ): echo $instance["custom_media_id"]; endif; ?>"/>
+		<input class="custom_media_id" id="<?php echo $this->get_field_id( 'custom_media_id' ); ?>" name="<?php echo $this->get_field_name( 'custom_media_id' ); ?>" type="hidden" value="<?php if ( ! empty( $instance['custom_media_id'] ) ) : echo $instance['custom_media_id']; endif; ?>"/>
 
 		<?php
 
 	}
-
 }
