@@ -75,10 +75,10 @@ class ZLFAFI_Widget_Our_Focus extends WP_Widget {
 				<div class="service-icon">
 					<?php if ( ! empty( $instance['link'] ) ) { ?>
 						<a href="<?php echo esc_url( $instance['link'] ); ?>">
-							<i class="pixeden fa <?php echo $icon_class; ?>" style="width:100%; height:100%; font-size: 5.5em; padding-top: 0.25em"></i>
+							<i class="pixeden fa <?php echo $icon_class; ?>" style="width:100%; height:100%; font-size: 4.5em; padding-top: 0.35em"></i>
 						</a><!-- FOCUS ICON-->
 					<?php } else { ?>
-					<i class="pixeden fa <?php echo $icon_class; ?>" style="width:100%; height:100%; font-size: 5.5em; padding-top: 0.25em"></i><!-- FOCUS ICON-->
+					<i class="pixeden fa <?php echo $icon_class; ?>" style="width:100%; height:100%; font-size: 4.5em; padding-top: 0.35em"></i><!-- FOCUS ICON-->
 					<?php } ?>
 				</div>
 				<?php
